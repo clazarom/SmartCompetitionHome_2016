@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TableRow android:layout_marginTop="21dp" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/message_publish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/publish_m"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/mqtt_publish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/send_mqtt" />
+        </LinearLayout>
+    </TableRow>
+
+    <TableRow android:layout_marginTop="21dp" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/mqtt_subscribe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mqtt_publish"
+                android:text="@string/receive_mqtt" />
+
+            <Button
+                android:id="@+id/mqtt_unsubscribe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mqtt_publish"
+                android:layout_toEndOf="@id/mqtt_subscribe"
+                android:text="@string/not_receive_mqtt" />
+        </LinearLayout>
+    </TableRow>
+
+    <TableRow android:layout_marginTop="21dp" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/door_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mqtt_subscribe"
+                android:text="@string/door" />
+
+            <EditText
+                android:id="@+id/door_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/mqtt_subscribe"
+                android:layout_toRightOf="@id/door_text"
+                android:inputType="text"
+                android:text="@string/door_dstate" />
+        </LinearLayout>
+    </TableRow>
+
+    <TableRow android:layout_marginTop="21dp" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/temperature_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/door_text"
+                android:text="@string/temperature" />
+
+            <EditText
+                android:id="@+id/temperature_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/door_text"
+                android:layout_toEndOf="@id/temperature_text"
+                android:inputType="text"
+                android:text="@string/not_assigned" />
+        </LinearLayout>
+    </TableRow>
+
+    <TableRow android:layout_marginTop="21dp" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/pressure_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/temperature_text"
+                android:text="@string/pressure" />
+
+            <EditText
+                android:id="@+id/pressure_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/temperature_text"
+                android:layout_toEndOf="@id/pressure_text"
+                android:inputType="text"
+                android:text="@string/not_assigned" />
+        </LinearLayout>
+    </TableRow>
+
+    <TableRow android:layout_marginTop="21dp" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/altitude_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pressure_text"
+                android:text="Altitude:" />
+
+            <EditText
+                android:id="@+id/altitude_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pressure_text"
+                android:layout_toEndOf="@id/altitude_text"
+                android:inputType="text"
+                android:text="@string/not_assigned" />
+        </LinearLayout>
+    </TableRow>
+
+    <TableRow android:layout_marginTop="21dp" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/warning_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/altitude_text"
+                android:text="@string/warning" />
+
+            <EditText
+                android:id="@+id/warning_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/altitude_text"
+                android:layout_toEndOf="@id/warning_text"
+                android:inputType="text"
+                android:text="@string/not_assigned" />
+        </LinearLayout>
+    </TableRow>
+
+</TableLayout>
