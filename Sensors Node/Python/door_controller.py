@@ -25,7 +25,7 @@ def check_inc(input):
 	if input == 1:
 		input_state = GPIO.input(inc1_pin)
 	elif input == 2:
-		input_state = GPIO.input(inc1_pin)
+		input_state = GPIO.input(inc2_pin)
 	else:
 		input_state = -1
 	#Return the result

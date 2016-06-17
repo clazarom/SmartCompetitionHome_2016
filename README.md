@@ -1,5 +1,6 @@
 # SmartCompetitionHome_2016
 Smart competition home project for Elment14 PiIoT challenge
+https://www.element14.com/community/community/design-challenges/pi-iot/blog/authors/clazarom
 
 We developped a smart-home, including a competition system. In this repository, we include the source code of the three main components:
 - Central Node: a Raspberry Pi 3
