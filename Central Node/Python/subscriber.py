@@ -2,6 +2,7 @@ import paho.mqtt.client as mqtt
 import console_interface as console
 import datetime
 
+
 timeout = 0.1 #seconds
 
 #The callback for when the client receives a CONNACK response from the server
@@ -11,12 +12,13 @@ def on_connect(client, userdata, flags, rc):
     #Subscribing in on_connect() means that if we lose the connection and
     #reconnect then subscriptions will be renewed
     client.subscribe(topic_id)
-
+    
     #Update interface
     console.conn_status(screen, rc)
     #Check if there is any user input
     if (console.get_char(screen)):
         client.disconnect()
+	console.end_screen_win(screen)
         print("Disconnect")
 
 def on_message(client, userdata, msg):
@@ -41,17 +43,17 @@ def on_message(client, userdata, msg):
         console.update_values(screen, console.ALARM_POSITION, "!! ALARM : "+ str(time))
     
     #console.update_values(screen, console.TEMP_POSITION, "11111")
-
     screen.refresh()
 
-    #Check if there is any use input
+    #Check if there is any user input
     if (console.get_char(screen)):
         client.disconnect()
+        console.end_screen_win(screen)
         print("Disconnect")
 
 
 #Set parameters for mqtt
-client= mqtt.Client()
+client= mqtt.Client(client_id="secure_pi3")
 client.on_connect = on_connect
 client.on_message = on_message
 
@@ -61,5 +63,6 @@ client.connect(server_url, 1883, 60)
 
 #Init the console interface
 screen = console.init_screen()
+#screen.refresh()
 #Start mqtt client
 client.loop_forever()
