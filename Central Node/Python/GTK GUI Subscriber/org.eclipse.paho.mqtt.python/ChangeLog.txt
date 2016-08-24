@@ -1,0 +1,60 @@
+v1.1.1 - 2015-xx-xx
+===================
+
+- Further fix for Client constructor for the case where "localhost" is
+  unresolvable.
+
+
+v1.1 - 2015-01-30
+=================
+
+- Add support for wildcard certificates. Closes #440547.
+- Default connection behaviour has been reverted to MQTT v3.1 instead of
+  v3.1.1. There is as yet insufficient support for v3.1.1 to rely on, and
+  current v3.1 implementations do not return the correct CONNACK code to allow
+  detection of the fault. Closes #451735.
+- Fix incorrect handling of queued messages after reconnecting. Closes
+  #452672.
+- Fix possible race condition if the connection in loop_start() does not
+  complete before loop_stop() is called, meaning the network thread never
+  ends. Closes #448428. Thanks to Kees Bakker.
+
+
+v1.0.2 - 2014-09-13
+===================
+
+- Fix "protocol" not being used in publish.single()
+- Fix Client constructor for the case where "localhost" is unresolvable.
+  Closes #439277.
+- Don't attempt to encode topic to utf-8 twice. Thanks to Luc Milland.
+- Handle "unicode" type payloads on Python 2.7. Thanks to Luc Milland.
+- Fix reconnecting after sending more QoS>0 messages than inflight messages is
+  set to, whilst connecting.  Closes #443935. Thanks to Hiram van Paassen.
+- Fix possible race condition when connecting with TLS and publishing at the
+  same time, which could lead to PUBLISH data being sent before any other
+  messages and unencrypted. Closes #443964. Thanks to Hiram van Paassen.
+- Handle exceptions from select() in client loop() function. Closes #443881.
+  Thanks to Jeff Jasper.
+
+
+v1.0.1
+======
+
+- Fix incorrect reconnect that occurred if calling loop_stop() before
+  disconnect().
+
+v1.0
+====
+
+- Default protocol is now MQTT v3.1.1.
+- Client will reconnect using MQTT v3.1 if a v3.1.1 connection fails due to
+  the incorrect protocol version number.
+- All strings are now correctly encoded as utf-8.
+- Add support for "session present" flag in on_connect callback.
+
+v0.9.1
+======
+
+- Fix CONNECT packet for MQTT v3.1.1.
+- Fix potential lockup when publishing from on_publish callback.
+- Add version information to paho.mqtt.__version__
