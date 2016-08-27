@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="iit.ece.edu.smartcompetitionhouse.CompetitionTrackActivity">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar2"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+
+    </android.support.design.widget.AppBarLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text ="@string/welcome_competition"
+        android:layout_marginTop="50dp"
+        android:padding = "10dp"/>
+
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id = "@+id/TableCompetition"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:shrinkColumns="*"
+        android:stretchColumns="*"
+        android:padding="50dp">
+        <TableRow>
+            <TextView
+                android:id = "@+id/currentDistance"
+                android:text="0"
+                android:padding="10dip"
+                style="@style/distanceText"/>
+            <TextView
+                android:text="km"
+                android:gravity="right"
+                android:padding="10dip"
+                style="@style/distanceText"/>
+        </TableRow>
+
+    </TableLayout>
+
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id = "@+id/TableCompetitionTotal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:shrinkColumns="*"
+            android:stretchColumns="*"
+            android:padding="20dp"
+            >
+            <TableRow>
+                <TextView
+                    android:text="Today"
+                    android:padding="3dip"
+                    style="@style/distanceTotalText"/>
+                <TextView
+                    android:id = "@+id/todayDistance"
+                    android:text="0"
+                    android:padding="3dip"
+                    style="@style/distanceTotalText"/>
+                <TextView
+                    android:text="km"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    style="@style/distanceTotalText"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id = "@+id/month"
+                    android:text="Month"
+                    android:padding="3dip"
+                    style="@style/distanceTotalText"/>
+                <TextView
+                    android:id = "@+id/monthDistance"
+                    android:text="0"
+                    android:padding="3dip"
+                    style="@style/distanceTotalText"/>
+                <TextView
+                    android:text="km"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    style="@style/distanceTotalText"/>
+            </TableRow>
+
+        </TableLayout>
+
+        <Button
+            android:id="@+id/competition_state_button"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:textSize = "10sp"
+            android:text="@string/see_competitors"
+
+            />
+
+</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
