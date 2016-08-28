@@ -6,8 +6,7 @@ package iit.ece.edu.smartcompetitionhouse;
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.*;
-import android.os.Bundle;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 public class CountSteps implements SensorEventListener {
@@ -48,7 +47,6 @@ public class CountSteps implements SensorEventListener {
         started = true;
         initial_count = initial;
     }
-
 
 
 

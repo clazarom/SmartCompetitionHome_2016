@@ -313,7 +313,7 @@ public class DatabaseManager {
                         }
                         //Include updated value: only in the server case
                         //Otherwise... we include sync value again
-                        map.put(col, cursorSync.getString(columns.length + 1 ));
+                        map.put(col, cursorSync.getString(columns.length ));
 
 
                         wordList.add(map);
@@ -437,7 +437,7 @@ public class DatabaseManager {
         SQLiteDatabase db1=ctx.openOrCreateDatabase(databaseFile, SQLiteDatabase.OPEN_READWRITE, null);
 
         //Update query: update status, searching the right last_updated value
-        String updateQuery = "UPDATE "+table +" SET "+upDateColumn+" = '"+status+"' WHERE "+timeStampColumn+" = '"+ last_up+"'";
+        String updateQuery = "UPDATE "+table +" SET "+status_col+" = '"+status+"' WHERE "+timeStampColumn+" = '"+ last_up+"'";
         Log.d("query", updateQuery);
         // System.out.println("^^^^^^^^^^^UPDATED???: " + updateQuery);
 

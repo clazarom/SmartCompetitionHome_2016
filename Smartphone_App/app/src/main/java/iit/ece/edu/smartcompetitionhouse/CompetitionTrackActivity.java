@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -80,6 +81,11 @@ public class CompetitionTrackActivity extends AppCompatActivity {
     private String currentMonth;
     private String currentDay;
 
+    //When to send the info to the server
+    private static final int _LOCATIONS_TO_SEND = 5;
+    private int num_locations;
+    private ServerConnector mServer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         System.out.println("On create");
@@ -93,6 +99,8 @@ public class CompetitionTrackActivity extends AppCompatActivity {
         currentDistance = (TextView) findViewById(R.id.currentDistance);
         todayDistance = (TextView) findViewById(R.id.todayDistance);
         monthDistance = (TextView) findViewById(R.id.monthDistance);
+
+
 
 
         // ****** REQUESTS *****
@@ -120,20 +128,6 @@ public class CompetitionTrackActivity extends AppCompatActivity {
                         LOCATION_REFRESH_DISTANCE, mLocationListener);
 
             }
-        //Request write read:
-       /* String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        requestPermissions(permissions, WRITE_REQUEST_CODE);
-        String[] permissions2 = {Manifest.permission.READ_EXTERNAL_STORAGE};
-        requestPermissions(permissions2, READ_REQUEST_CODE);*/
-
-
-
-        //Recover data from database
-
-        //TODO Get user name
-
-        //Create database object
-        myDB = new DatabaseManager(this);
 
 
 
@@ -141,6 +135,11 @@ public class CompetitionTrackActivity extends AppCompatActivity {
 
         //DEBUG: Try updating
         //updateSessionDistance((float)0.11);
+
+        //TODO Get user name
+
+        //Create database object
+        myDB = new DatabaseManager(this);
 
         //Step counter
         if (!startedCounter) {
@@ -157,17 +156,19 @@ public class CompetitionTrackActivity extends AppCompatActivity {
             //Update gui
             updateTextViews();
 
-
-
         }
         else{
 
             System.out.println("Initial steps: "+initial_steps);
             stepCounter = new CountSteps(this, initial_steps);
             updateTextViews();
-
-
         }
+
+        //Sending parameters
+        num_locations = 0;
+        mServer = new ServerConnector(ServerConnector._JSON_ID, ServerConnector._IIT_SERVER_UPDATE_VALUES_URL + ServerConnector._PORT,
+                                        "", myDB, this);
+
 
     }
     @Override
@@ -267,7 +268,7 @@ public class CompetitionTrackActivity extends AppCompatActivity {
         public void onLocationChanged(final Location location) {
             System.out.println("New location");
 
-            //your code here
+            //Check if it is the first updated location
             if (previousLocation ==null) {
                 previousLocation = location;
                 //Obtain distance from step counter, not GPS
@@ -280,7 +281,7 @@ public class CompetitionTrackActivity extends AppCompatActivity {
                 Location.distanceBetween(location.getLatitude(), location.getLongitude(),
                         previousLocation.getLatitude(), previousLocation.getLongitude(), results);*/
                 float distance = previousLocation.distanceTo(location);
-                CompetitionTrackActivity.updateSessionDistance(distance);
+                //CompetitionTrackActivity.updateSessionDistance(distance);
                 previousLocation = location;
                 //Obtain distance from step counter, not GPS
                 float steps = stepCounter.getSteps();
@@ -298,6 +299,13 @@ public class CompetitionTrackActivity extends AppCompatActivity {
                 }
 
 
+            }
+
+            //See whether to send data to the sesrver:
+            if(num_locations == _LOCATIONS_TO_SEND){
+                num_locations = 0;
+                List<Map<String, String>> notUpdated = myDB.getAllNotUpdatedValues(user_name, columnsTable, DatabaseManager.upDateColumn, DatabaseManager.updatedStatusNo);
+                mServer.sendToCentralNode(mServer.convertToJSON(notUpdated), mServer.WRITE_URL);
             }
         }
 
