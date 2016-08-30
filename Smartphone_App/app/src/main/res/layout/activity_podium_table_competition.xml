@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="iit.ece.edu.smartcompetitionhouse.MainActivity">
+    tools:context="iit.ece.edu.smartcompetitionhouse.PodiumTableCompetition">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+    <include layout="@layout/content_podium_table_competition" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -30,28 +30,5 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@android:drawable/ic_dialog_email" />
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
-        <Button
-            android:id="@+id/smart_house_button"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:text="@string/smart_house"
-
-            />
-        <Button
-            android:id="@+id/competition_button"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:text="@string/competition"
-
-            />
-    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

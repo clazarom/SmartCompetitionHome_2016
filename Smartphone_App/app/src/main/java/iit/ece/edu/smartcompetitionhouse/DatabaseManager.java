@@ -238,7 +238,7 @@ public class DatabaseManager {
      * Read values from a given database
      * @param ctx
      * @param database
-     * @param column
+     * @param columns
      * @return
      */
 
@@ -307,13 +307,19 @@ public class DatabaseManager {
                     do {
                         HashMap<String, String> map = new HashMap<String, String>();
                         //map.put("table_name", MainActivityBM.dispTableName);
-                        for (int i = 0; i < columns.length-1 ; i++) {
+                        for (int i = 0; i < columns.length ; i++) {
                             map.put(columns[i], cursorSync.getString(i));
                             //lastUpd.add(cursorSync.getString(i));
                         }
                         //Include updated value: only in the server case
                         //Otherwise... we include sync value again
                         map.put(col, cursorSync.getString(columns.length ));
+
+                        //Add table name:
+                        map.put("table_name",table);
+
+                        //Add type:
+                        map.put("type","insert");
 
 
                         wordList.add(map);

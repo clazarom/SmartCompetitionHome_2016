@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="iit.ece.edu.smartcompetitionhouse.PodiumTableCompetition"
+    tools:showIn="@layout/activity_podium_table_competition">
+
+
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id = "@+id/TableCompetitionTotal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:shrinkColumns="*"
+        android:stretchColumns="*"
+        android:padding="20dp"
+        >
+        <TableRow>
+            <TextView
+                android:id = "@+id/firstResident"
+                android:text="---"
+                android:padding="3dip"
+                style="@style/distanceTotalText"/>
+            <TextView
+                android:id = "@+id/firstDistance"
+                android:text="m"
+                android:padding="3dip"
+                style="@style/distanceTotalText"/>
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:id = "@+id/secondResident"
+                android:text="---"
+                android:padding="3dip"
+                style="@style/distanceTotalText"/>
+            <TextView
+                android:id = "@+id/secondDistance"
+                android:text="m"
+                android:padding="3dip"
+                style="@style/distanceTotalText"/>
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:id = "@+id/thirdResident"
+                android:text="---"
+                android:padding="3dip"
+                style="@style/distanceTotalText"/>
+            <TextView
+                android:id = "@+id/thirdDistance"
+                android:text="m"
+                android:padding="3dip"
+                style="@style/distanceTotalText"/>
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:id = "@+id/fourthdResident"
+                android:text="---"
+                android:padding="3dip"
+                style="@style/distanceTotalText"/>
+            <TextView
+                android:id = "@+id/fourthDistance"
+                android:text="m"
+                android:padding="3dip"
+                style="@style/distanceTotalText"/>
+
+        </TableRow>
+
+    </TableLayout>
+
+</RelativeLayout>

@@ -12,6 +12,10 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,16 +79,17 @@ public class CompetitionTrackActivity extends AppCompatActivity {
     public static final int _TIME_STAMP = 0;
     public static final int _TODAY = 2;
     public static final int _MONTH = 3;
-    public static final String user_name = "user";
+    public static final String user_name = "Sergio" ;
 
     //Session info
     private String currentMonth;
     private String currentDay;
 
     //When to send the info to the server
-    private static final int _LOCATIONS_TO_SEND = 5;
-    private int num_locations;
-    private ServerConnector mServer;
+    private static final int _LOCATIONS_TO_SEND = 0;
+    private int num_locations = 0;
+    public static ServerConnector mServer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,11 +170,40 @@ public class CompetitionTrackActivity extends AppCompatActivity {
         }
 
         //Sending parameters
-        num_locations = 0;
+        //num_locations = 0;
         mServer = new ServerConnector(ServerConnector._JSON_ID, ServerConnector._IIT_SERVER_UPDATE_VALUES_URL + ServerConnector._PORT,
                                         "", myDB, this);
 
 
+        //Buttons
+        Button b1 = (Button) findViewById(R.id.competition_state_button);
+        b1.setOnClickListener(stateListener);
+
+
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
     @Override
     protected void onStart() {
@@ -224,10 +258,8 @@ public class CompetitionTrackActivity extends AppCompatActivity {
     public static void updateSessionDistance(float dist){
         //Distance in meters
         sessionDistanceValue = dist;
-        System.out.println("Session distance: "+sessionDistanceValue);
         //Update in GUI
         updateTextViews();
-
 
         //Store in database
         ArrayList<String> values = new ArrayList<>();
@@ -235,6 +267,9 @@ public class CompetitionTrackActivity extends AppCompatActivity {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String currentDateandTime = format.format(new Date());
         values.add("'"+currentDateandTime+"'");
+
+        System.out.println("Session distance: " + sessionDistanceValue +" ("+currentDateandTime+")");
+
         //Distances:
         values.add(sessionDistanceValue+"");
         values.add((sessionDistanceValue+dayDistanceValue)+"");
@@ -302,11 +337,14 @@ public class CompetitionTrackActivity extends AppCompatActivity {
             }
 
             //See whether to send data to the sesrver:
-            if(num_locations == _LOCATIONS_TO_SEND){
+            System.out.println("Location number: "+num_locations);
+            if(num_locations >= _LOCATIONS_TO_SEND){
                 num_locations = 0;
                 List<Map<String, String>> notUpdated = myDB.getAllNotUpdatedValues(user_name, columnsTable, DatabaseManager.upDateColumn, DatabaseManager.updatedStatusNo);
-                mServer.sendToCentralNode(mServer.convertToJSON(notUpdated), mServer.WRITE_URL);
+               if (notUpdated != null && !notUpdated.isEmpty())
+                    mServer.sendToCentralNode(mServer.convertToJSON(notUpdated), mServer.WRITE_URL, mServer.asyncHTTPClient);
             }
+            num_locations++;
         }
 
         private float stepsToKm(float steps){
@@ -399,5 +437,22 @@ public class CompetitionTrackActivity extends AppCompatActivity {
         monthDistance.setText(""+trun);
 
     }
+
+    /***************************************************
+     * PODIUM BUTTON
+     */
+
+    View.OnClickListener stateListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            //
+            String msg = "Attempting to connect…";
+            Intent intent = new Intent(ctx, PodiumTableCompetition.class);
+
+            startActivity(intent);
+
+
+        }
+    };
 
 }

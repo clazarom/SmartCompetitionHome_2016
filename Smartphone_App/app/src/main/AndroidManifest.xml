@@ -4,7 +4,7 @@
 
     <!-- GPS -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <!-- Write and read -->
     <uses-permission android:name="android.permission.READ_LOGS" />
@@ -14,8 +14,6 @@
     <!-- Permission: Allow application to connect to Internet -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
-
 
     <application
         android:allowBackup="true"
@@ -38,10 +36,11 @@
             android:name=".CompetitionTrackActivity"
             android:configChanges="keyboard"
             android:label="@string/competition_name"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".PodiumTableCompetition"
+            android:label="@string/title_activity_podium_table_competition"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

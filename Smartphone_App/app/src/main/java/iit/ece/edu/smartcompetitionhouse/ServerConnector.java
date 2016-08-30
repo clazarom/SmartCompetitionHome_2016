@@ -26,11 +26,12 @@ import java.util.Map;
 public class ServerConnector {
 
     //Constant values:
-    public static final String _JSON_ID = "competitionJSON";
+    public static final String _JSON_ID = "";
     //IP - http://50.178.148.186/
     //Domain - http://competitionvault.wow64.net/
-    public static final String _IIT_SERVER_UPDATE_VALUES_URL = "http://competitionvault.wow64.net";
-    public static final String _PORT  = "";
+    public static final String _IIT_SERVER_UPDATE_VALUES_URL = "";
+
+    public static final String _PORT  = ":";
     //Access the database
     private DatabaseManager dbManager;
     private Context databaseContext;
@@ -66,7 +67,7 @@ public class ServerConnector {
      * Function to send a JSON object to IIT server
      */
 
-    public void sendToCentralNode(String json, String url){
+    public void sendToCentralNode(String json, String url, AsyncHttpResponseHandler client){
 
         if (url != null && !url.equals("")) {
             System.out.println("Sending: " + json);
@@ -77,7 +78,7 @@ public class ServerConnector {
             params.put(_JSON_ID, json);
 
             //Send http request
-            httpClient.post(url, params, asyncHTTPClient);
+            httpClient.post(url, params, client);
 
             sending = true;
         }else{
@@ -108,7 +109,7 @@ public class ServerConnector {
     /****************************************************
      * HTTP ASYNC CLIENT
      */
-    private final AsyncHttpResponseHandler asyncHTTPClient = new AsyncHttpResponseHandler() {
+    public final AsyncHttpResponseHandler asyncHTTPClient = new AsyncHttpResponseHandler() {
 
         @Override
         public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -148,6 +149,7 @@ public class ServerConnector {
                 //Analyze each JSON object
                 for(int i=0; i<arr.length();i++){
                     JSONObject jsonObj = (JSONObject)arr.get(i);
+                    System.out.println("Update db!: " +(String) jsonObj.get("updated"));
                     dbManager.updateSyncStatus(databaseContext, (String) jsonObj.get("table_name"),
                             DatabaseManager.upDateColumn, (String) jsonObj.get("updated"), (String) jsonObj.get("time_stamp"));
 
@@ -171,7 +173,7 @@ public class ServerConnector {
     /**
      * convertToString()
      */
-    private String convertToString(byte[] args){
+    public static String convertToString(byte[] args){
         String str = "";
         try{
             str = new String(args, "UTF-8"); // for UTF-8 encoding

@@ -20,6 +20,7 @@
     <style name="ExtraLarge">
         <item name="android:textSize">40sp</item>
     </style>
+
     <style name="distanceText" parent="ExtraLarge">
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@android:color/black</item>

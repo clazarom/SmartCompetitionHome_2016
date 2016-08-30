@@ -2,13 +2,15 @@
     <string name="app_name">Smart Competition House</string>
     <string name="competition_name">Competition starts</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">User</string>
     <string name="smart_house">SMART HOUSE</string>
     <string name="competition">Competition</string>
     <string name="welcome_competition">Hi there! Start accumulating miles/km by walking, running or flying</string>
     <string name="see_competitors">Podium</string>
 
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_podium_table_competition">PodiumTableCompetition</string>
 
 
 </resources>

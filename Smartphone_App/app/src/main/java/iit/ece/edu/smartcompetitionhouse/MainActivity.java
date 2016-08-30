@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -18,8 +19,10 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    public static final String EXTRA_MESSAGE = "Pass_message";
+    private String userName;
     private Context ctx;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Logged in user: ", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -66,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            //Start fragment:
+
             return true;
         }
 
@@ -92,8 +97,10 @@ public class MainActivity extends AppCompatActivity {
             String msg = "Attempting to connect…";
             Intent intent = new Intent(ctx, CompetitionTrackActivity.class);
             //EditText editText = (EditText) findViewById(R.id.edit_message);
-            //String message = editText.getText().toString();
-            //intent.putExtra(EXTRA_MESSAGE, message);
+            if (userName != null) {
+                String message = userName.toString();
+                intent.putExtra(EXTRA_MESSAGE, message);
+            }
             startActivity(intent);
 
 
