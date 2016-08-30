@@ -27,4 +27,5 @@ dependencies {
     compile 'com.android.support:design:24.1.1'
     compile files('src/main/java/libs/android-async-http-1.4.6.jar')
     compile files('src/main/java/libs/gson-2.2.4.jar')
+    compile files('src/main/java/libs/mqtt-client-0.4.0.jar')
 }

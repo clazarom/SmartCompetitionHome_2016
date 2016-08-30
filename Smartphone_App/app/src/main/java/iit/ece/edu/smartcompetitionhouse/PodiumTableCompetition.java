@@ -101,30 +101,40 @@ public class PodiumTableCompetition extends AppCompatActivity {
         try {
             while (keys.hasNext()) {
                 String key = (String) keys.next();
+
                 double val = Double.parseDouble(lastMonthValues.get(key));
+               // System.out.println("Douuble distance: "+val);
                 if (val >= first) {
                     //First will be this one
                     //But! move all the others one step down
                     for (int i = 3; i >= 1; i--)
                         sortedRooms[i] = sortedRooms[i - 1];
                     sortedRooms[0] = key;
+                    first = val;
+                    //System.out.println("First: " + key);
 
                 } else if (val >= second) {
                     //Second will be this one
-                    for (int i = 2; i >= 1; i--)
+                    for (int i = 3; i >= 2; i--)
                         sortedRooms[i] = sortedRooms[i - 1];
                     sortedRooms[1] = key;
+                    second = val;
+                    //System.out.println("Second: "+key);
+
 
                 } else if (val >= third) {
                     sortedRooms[3] = sortedRooms[2];
                     sortedRooms[2] = key;
+                    third = val;
+                    System.out.println("Third: "+key);
 
 
                 } else if (val >= fourth) {
                     sortedRooms[3] = key;
-
-
+                    fourth = val;
+                    //System.out.println("Fourth: "+key);
                 }
+
             }
             //Show in the GUI
             for (int i =0; i < roommates.length; i ++) {
@@ -177,7 +187,6 @@ public class PodiumTableCompetition extends AppCompatActivity {
             System.out.println("Get comp Server response: "+response);
 
             try {
-
                 //Convert to a JSON Array and get the arguments
                 JSONArray arr = new JSONArray(response);
                 //List<String> args = new ArrayList();
@@ -188,10 +197,8 @@ public class PodiumTableCompetition extends AppCompatActivity {
                     String key = (String) keys.next();
                     lastMonthValues.put(key, jsonObj.getString(key));
                 }
-
                 //Update gui values:
                 updateTableValues();
-
 
             } catch (JSONException e) {
                 e.printStackTrace();

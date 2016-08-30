@@ -83,8 +83,14 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener smartHouseListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            //
 
+            Intent intent = new Intent(ctx, SmartHomeActivity.class);
+            //EditText editText = (EditText) findViewById(R.id.edit_message);
+            if (userName != null) {
+                String message = userName.toString();
+                intent.putExtra(EXTRA_MESSAGE, message);
+            }
+            startActivity(intent);
             String msg = "Attempting to connect…";
 
         }

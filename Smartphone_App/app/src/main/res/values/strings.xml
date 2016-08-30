@@ -12,5 +12,22 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_podium_table_competition">PodiumTableCompetition</string>
 
+    <!-- Smart home activity -->
+    <string name="title_activity_smart_home">SmartHomeActivity</string>
+    <string name="not_assigned">--</string>
+    <string name="warning">WARNING: </string>
+    <string name="send_mqtt">Publish</string>
+    <string name="receive_mqtt">Subscribe</string>
+    <string name="not_receive_mqtt">Unubscribe</string>
+    <string name="door">Door state: </string>
+    <string name="door_dstate">Unknown </string>
+    <string name="temperature">Temperature: </string>
+    <string name="pressure">Pressure: </string>
+    <string name="publish_m">To publish </string>
+
+
+
+    not_assigned
+
 
 </resources>

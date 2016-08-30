@@ -26,7 +26,7 @@ import java.util.Map;
 public class ServerConnector {
 
     //Constant values:
-    public static final String _JSON_ID = "";
+    public static final String _JSON_ID = "competitionJSON";
     //IP - http://50.178.148.186/
     //Domain - http://competitionvault.wow64.net/
     public static final String _IIT_SERVER_UPDATE_VALUES_URL = "";

@@ -36,10 +36,14 @@
             android:name=".CompetitionTrackActivity"
             android:configChanges="keyboard"
             android:label="@string/competition_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PodiumTableCompetition"
             android:label="@string/title_activity_podium_table_competition"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SmartHomeActivity"
+            android:label="@string/title_activity_smart_home"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
