@@ -8,6 +8,8 @@ from operator import itemgetter
 import errno
 from socket import error as socket_error
 
+import read_db as db
+
 
 #import pygtk
 #pygtk.require('2.0')
@@ -65,7 +67,7 @@ class MyWindow(Gtk.Window):
 	third_column = [distance_first, distance_second, distance_third, distance_forth]
 
 	roommate_array = ["Adnan", "Cat", "Chris", "Sergio"]
-	distance_array = array('i', [5, 1, 70, 10])
+	distance_array = array('i', [0, 0, 0, 0])
 
 	winner_list = [(roommate_array[0], distance_array[0]), (roommate_array[1], distance_array[1]), (roommate_array[2], distance_array[2]), (roommate_array[3], distance_array[3])]
 
@@ -333,9 +335,17 @@ class MyWindow(Gtk.Window):
 		#self.temp_image.set_from_file("temp_plot.jpeg")
         	#self.frame_temp.add(self.temp_image)
 
+		
+
 	#Function to update label values
 	def set_label_value(self, label, value):
 		label.set_text(str(value))
+
+		#Use it to also verify competition database:
+		for (roomie_name) in roommate_array:
+                        last_row = db.read_last_sample(roommie_name)
+                        monhtly_distance = last_row[3]
+                        update_distance_value(roomie_name, monthly_distance)
 
 	#Functin to update connection status
 	def set_connection_status(self, value):
